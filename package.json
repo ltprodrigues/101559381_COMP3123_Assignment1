@@ -1,15 +1,25 @@
 {
-  "name": "assignment",
+  "name": "COMP 3123 - Assignment 1    ",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [    
+    "expressJS",
+    "nodeJS",
+    "API",
+    "mongoDB",
+    "REST",
+    "mongoose"],
+
+  "author": "Leticia Rodrigues",
   "license": "ISC",
   "type": "commonjs",
+  
   "dependencies": {
     "bcrypt": "^6.0.0",
     "dotenv": "^18.0.8",
