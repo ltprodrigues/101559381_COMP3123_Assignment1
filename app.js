@@ -1,6 +1,8 @@
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+const userRoutes = require('./routes/userRoutes');
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -16,5 +18,16 @@ app.get('/health', (req, res) => {
             : 'disconnected'
     });
 });
+
+app.use('/api/v1/user', userRoutes)
+
+app.use((request, response) =>{
+    response.status(404).json({
+        status: 'error',
+        message: 'Route not found'
+    });
+});
+
+app.use(errorHandler);
 
 module.exports = app;
