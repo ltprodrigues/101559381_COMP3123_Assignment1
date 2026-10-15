@@ -5,3 +5,5 @@ node_modules/
 logs/*
 !logs/.gitkeep
 *.log
+.vercel
+.env*

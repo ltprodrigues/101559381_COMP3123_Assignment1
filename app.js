@@ -6,6 +6,7 @@ const errorHandler = require('./middleware/errorHandler');
 const employeeRoutes = require('./routes/employeeRoutes');
 const morgan = require('morgan');
 const logger = require('./utils/logger');
+const connectDB = require('./config/db')
 
 const app = express();
 
@@ -24,6 +25,16 @@ app.use(morgan(
 
 app.use(helmet());
 app.use(express.json());
+
+app.use(async(request, response, next) => {
+    try{
+        await connectDB();
+        next();
+    } catch (error){
+        next(error);
+
+    }
+})
 
 app.get('/health', (req, res) => {
     res.status(200).json({
