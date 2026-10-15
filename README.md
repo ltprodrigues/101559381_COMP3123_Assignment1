@@ -398,7 +398,10 @@ Health check:
 
 https://101559381-comp-3123-assignment1.vercel.app/health
 
+The root URL has no homepage. Use /health to check the API status.
+
 Production environment variables are configured in Vercel.
+
 
 Locally, logs are written to logs/app.log. On Vercel, logs are
 sent to the console and viewed through Runtime Logs.
