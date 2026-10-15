@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middleware/errorHandler');
+const employeeRoutes = require('./routes/employeeRoutes');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api/v1/user', userRoutes)
+app.use('/api/v1/emp', employeeRoutes);
 
 app.use((request, response) =>{
     response.status(404).json({
