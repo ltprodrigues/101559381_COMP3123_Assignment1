@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
+const logger = require('../utils/logger');
 
 const signup = async (request, response, next) => {
     try{
@@ -12,6 +13,10 @@ const signup = async (request, response, next) => {
             username,
             email,
             password: hashedPassword
+        });
+
+        logger.info('Signup successful', {
+            userId: user._id.toString()
         });
 
         return response.status(201).json({
@@ -39,6 +44,7 @@ const login = async (request, response, next) => {
         const user = await User.findOne(filter).select('+password');
 
         if (!user) {
+            logger.warn('Login failed: invalid credentials');
             return response.status(401).json({
                 status: 'error',
                 message: 'Invalid credentials'
@@ -51,6 +57,7 @@ const login = async (request, response, next) => {
         );
 
         if (!passwordMatches) {
+            logger.warn('Login failed: invalid credentials');
             return response.status(401).json({
                 status: 'error',
                 message: 'Invalid credentials'
@@ -66,6 +73,10 @@ const login = async (request, response, next) => {
                 expiresIn: process.env.JWT_EXPIRES_IN || '1h'
             }
         );
+
+        logger.info('Login successful', {
+            userId: user._id.toString()
+        });
 
         return response.status(200).json({
             status: 'success',

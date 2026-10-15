@@ -4,8 +4,23 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middleware/errorHandler');
 const employeeRoutes = require('./routes/employeeRoutes');
+const morgan = require('morgan');
+const logger = require('./utils/logger');
 
 const app = express();
+
+morgan.token('request-path', (request) => request.path);
+
+app.use(morgan(
+    ':method :request-path :status :response-time ms',
+    {
+        stream: {
+            write: (message) => {
+                logger.info(message.trim());
+            }
+        }
+    }
+));
 
 app.use(helmet());
 app.use(express.json());

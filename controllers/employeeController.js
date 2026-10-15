@@ -1,4 +1,5 @@
 const Employee = require('../models/Employee');
+const logger = require('../utils/logger');
 
 const createEmployee = async (request, response, next) => {
     try {
@@ -61,6 +62,13 @@ const getEmployeeById = async (request, response, next) => {
         }
 
         if (!employee.user.equals(request.user._id)) {
+            logger.warn('Employee ownership denied', {
+                userId: request.user._id.toString(),
+                employeeId: employee._id.toString(),
+                method: request.method,
+                path: request.path
+            });
+
             return response.status(403).json({
                 status: 'error',
                 message: 'You cannot access this employee'
@@ -87,6 +95,13 @@ const updateEmployee = async (request, response, next) => {
         }
 
         if (!employee.user.equals(request.user._id)) {
+            logger.warn('Employee ownership denied', {
+                userId: request.user._id.toString(),
+                employeeId: employee._id.toString(),
+                method: request.method,
+                path: request.path
+            });
+
             return response.status(403).json({
                 status: 'error',
                 message: 'You cannot update this employee'
@@ -137,6 +152,13 @@ const deleteEmployee = async (request, response, next) => {
         }
 
         if (!employee.user.equals(request.user._id)) {
+            logger.warn('Employee ownership denied', {
+                userId: request.user._id.toString(),
+                employeeId: employee._id.toString(),
+                method: request.method,
+                path: request.path
+            });
+            
             return response.status(403).json({
                 status: 'error',
                 message: 'You cannot delete this employee'

@@ -1,4 +1,5 @@
 require('dotenv').config();
+const logger = require('./utils/logger');
 
 const app = require('./app');
 const connectDB = require('./config/db');
@@ -11,6 +12,11 @@ const startServer = async () => {
 
         app.listen(PORT, () => {
             console.log(`Server running on http://localhost:${PORT}`);
+
+            logger.info('Server started', {
+                port: Number(PORT),
+                database: 'connected'
+            });
         });
     } catch (error) {
         console.error(
