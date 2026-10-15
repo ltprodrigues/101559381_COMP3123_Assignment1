@@ -56,6 +56,16 @@
     {
       "name": "Signup - Duplicate Username (409)",
       "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{",
+              "type": "string"
+            }
+          ]
+        },
         "method": "POST",
         "header": [],
         "body": {
@@ -1257,10 +1267,19 @@
     {
       "name": "Employees - Create Without Token (401)",
       "request": {
-        "method": "GET",
+        "method": "POST",
         "header": [],
         "url": {
-          "raw": ""
+          "raw": "{{baseUrl}}/api/v1/emp/employees",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "emp",
+            "employees"
+          ]
         }
       },
       "response": []
@@ -1271,7 +1290,236 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": ""
+          "raw": "{{baseUrl}}/does-not-exist",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "does-not-exist"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Vercel - Login User A (200)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"testusera\",\r\n    \"password\": \"StudyPass123!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://101559381-comp-3123-assignment1.vercel.app/api/v1/user/login",
+          "protocol": "https",
+          "host": [
+            "101559381-comp-3123-assignment1",
+            "vercel",
+            "app"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "user",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Vercel - List Employees User A (200)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenA}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://101559381-comp-3123-assignment1.vercel.app/api/v1/emp/employees",
+          "protocol": "https",
+          "host": [
+            "101559381-comp-3123-assignment1",
+            "vercel",
+            "app"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "emp",
+            "employees"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Vercel - Create Temporary Employee (201)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenA}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"first_name\": \"Temporary\",\r\n    \"last_name\": \"Employee\",\r\n    \"email\": \"vercel.test@example.com\",\r\n    \"position\": \"Intern\",\r\n    \"salary\": 40000,\r\n    \"date_of_joining\": \"2026-10-01\",\r\n    \"department\": \"IT\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://101559381-comp-3123-assignment1.vercel.app/api/v1/emp/employees",
+          "protocol": "https",
+          "host": [
+            "101559381-comp-3123-assignment1",
+            "vercel",
+            "app"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "emp",
+            "employees"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Vercel - Update Temporary Employee (200)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenA}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"first_name\": \"Temporary\",\r\n    \"last_name\": \"Employee\",\r\n    \"email\": \"vercel.test@example.com\",\r\n    \"position\": \"Junior Developer\",\r\n    \"salary\": 50000,\r\n    \"date_of_joining\": \"2026-10-01\",\r\n    \"department\": \"IT\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://101559381-comp-3123-assignment1.vercel.app/api/v1/emp/employees/6ad15b3c055fa5bb1007d4b2",
+          "protocol": "https",
+          "host": [
+            "101559381-comp-3123-assignment1",
+            "vercel",
+            "app"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "emp",
+            "employees",
+            "6ad15b3c055fa5bb1007d4b2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Vercel - Cross User Access (403)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenB}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://101559381-comp-3123-assignment1.vercel.app/api/v1/emp/employees/6ad15b3c055fa5bb1007d4b2",
+          "protocol": "https",
+          "host": [
+            "101559381-comp-3123-assignment1",
+            "vercel",
+            "app"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "emp",
+            "employees",
+            "6ad15b3c055fa5bb1007d4b2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Vercel - Delete Temporary Employee (204)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenA}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://101559381-comp-3123-assignment1.vercel.app/api/v1/emp/employees?eid=6ad15b3c055fa5bb1007d4b2",
+          "protocol": "https",
+          "host": [
+            "101559381-comp-3123-assignment1",
+            "vercel",
+            "app"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "emp",
+            "employees"
+          ],
+          "query": [
+            {
+              "key": "eid",
+              "value": "6ad15b3c055fa5bb1007d4b2"
+            }
+          ]
         }
       },
       "response": []

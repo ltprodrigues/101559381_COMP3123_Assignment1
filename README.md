@@ -387,6 +387,25 @@ These are fictional application accounts, not Atlas database credentials.
 
 If using a new database, create the accounts through signup first.
 
+
+## Deployment
+
+The API is hosted on Vercel:
+
+https://101559381-comp-3123-assignment1.vercel.app
+
+Health check:
+
+https://101559381-comp-3123-assignment1.vercel.app/health
+
+Production environment variables are configured in Vercel.
+
+Locally, logs are written to logs/app.log. On Vercel, logs are
+sent to the console and viewed through Runtime Logs.
+
+The authentication rate limiter uses in-memory counters per
+instance. Counters are not shared between Vercel instances.
+
 ## Screenshots
 
 The screenshots folder contains evidence of:
