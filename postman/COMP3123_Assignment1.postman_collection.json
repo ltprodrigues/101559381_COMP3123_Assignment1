@@ -1253,6 +1253,28 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Employees - Create Without Token (401)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Unknown Route (404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
     }
   ],
   "variable": [
